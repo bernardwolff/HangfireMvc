@@ -1,0 +1,55 @@
+﻿@using HangfireMvc.Models
+@model Default1Model
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+    <h1>Server Role is @Model.ServerRole</h1>
+
+    @using (Html.BeginForm("QueueServerAJob", "Default1", FormMethod.Post))
+    {
+        <input type="submit" value="Queue Server A Job" />
+        @Html.HiddenFor(m => m.ServerBJobId)
+        @Html.HiddenFor(m => m.ServerBJob2Id)
+        @Html.HiddenFor(m => m.ServerRole)
+        if (!string.IsNullOrEmpty(Model.ServerAJobId))
+        {
+            <span>Job ID = @Model.ServerAJobId</span>
+        }
+    }
+
+    @using (Html.BeginForm("QueueServerBJob", "Default1", FormMethod.Post))
+    {
+        <input type="submit" value="Queue Server B Job" />
+        @Html.HiddenFor(m => m.ServerAJobId)
+        @Html.HiddenFor(m => m.ServerBJob2Id)
+        @Html.HiddenFor(m => m.ServerRole)
+        if (!string.IsNullOrEmpty(Model.ServerBJobId))
+        {
+            <span>Job ID = @Model.ServerBJobId</span>
+        }
+    }
+
+    @using (Html.BeginForm("QueueServerBJob2", "Default1", FormMethod.Post))
+    {
+        <input type="submit" value="Queue Server B Job 2" />
+        @Html.HiddenFor(m => m.ServerAJobId)
+        @Html.HiddenFor(m => m.ServerBJobId)
+        @Html.HiddenFor(m => m.ServerRole)
+        if (!string.IsNullOrEmpty(Model.ServerBJob2Id))
+        {
+            <span>Job ID = @Model.ServerBJob2Id</span>
+        }
+    }
+</div>
+</body>
+</html>
